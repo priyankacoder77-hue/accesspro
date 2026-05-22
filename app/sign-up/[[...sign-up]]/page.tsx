@@ -41,6 +41,7 @@ const lightVars = {
 
 export default function SignUpPage() {
   const [isLight, setIsLight] = useState(false)
+  const [afterSignUpUrl, setAfterSignUpUrl] = useState('/onboard')
 
   useEffect(() => {
     setIsLight(document.documentElement.classList.contains('light'))
@@ -48,6 +49,11 @@ export default function SignUpPage() {
       setIsLight(document.documentElement.classList.contains('light'))
     )
     observer.observe(document.documentElement, { attributes: true, attributeFilter: ['class'] })
+
+    const params = new URLSearchParams(window.location.search)
+    const token = params.get('invite_token')
+    if (token) setAfterSignUpUrl('/onboard?invite_token=' + encodeURIComponent(token))
+
     return () => observer.disconnect()
   }, [])
 
@@ -103,6 +109,7 @@ export default function SignUpPage() {
 
         <SignUp
           signInUrl="/sign-in"
+          afterSignUpUrl={afterSignUpUrl}
           appearance={{
             variables: isLight ? lightVars : darkVars,
             elements: getClerkElements(isLight),
