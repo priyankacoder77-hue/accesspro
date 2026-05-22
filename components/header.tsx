@@ -94,9 +94,8 @@ export function Header({ onMobileMenuOpen }: HeaderProps) {
           justifyContent: 'space-between',
         }}
       >
-        {/* Left side: hamburger (mobile only) + app name (always) */}
+        {/* Left side: hamburger (mobile only) + app name */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '4px' }}>
-          {/* Hamburger — mobile only, no inline display so md:hidden works */}
           {onMobileMenuOpen && (
             <div className="flex md:hidden">
               <button
@@ -133,7 +132,7 @@ export function Header({ onMobileMenuOpen }: HeaderProps) {
           </Link>
         </div>
 
-        {/* Right side: theme toggle + auth — always visible */}
+        {/* Right side: theme toggle + auth */}
         <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginLeft: 'auto' }}>
           <button
             onClick={toggleTheme}
