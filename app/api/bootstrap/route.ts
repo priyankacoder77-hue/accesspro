@@ -148,17 +148,9 @@ export async function POST(req: Request): Promise<NextResponse> {
         console.error('[api/bootstrap] Failed to mark invite accepted', inviteUpdateError)
       }
 
-      const { error: clerkError } = await clerk.users.updateUser(userId, {
+      await clerk.users.updateUser(userId, {
         publicMetadata: { role: 'manager', org_id: orgId },
       })
-
-      if (clerkError) {
-        console.error('[api/bootstrap] Failed to update Clerk metadata', clerkError)
-        return NextResponse.json(
-          { error: { code: 'CLERK_ERROR', message: 'Failed to set up your account — please try again' } },
-          { status: 500 }
-        )
-      }
 
       return NextResponse.json({ role: 'manager', org_id: orgId }, { status: 200 })
     } else {
@@ -203,17 +195,9 @@ export async function POST(req: Request): Promise<NextResponse> {
         )
       }
 
-      const { error: clerkError } = await clerk.users.updateUser(userId, {
+      await clerk.users.updateUser(userId, {
         publicMetadata: { role: 'admin', org_id: orgId },
       })
-
-      if (clerkError) {
-        console.error('[api/bootstrap] Failed to update Clerk metadata', clerkError)
-        return NextResponse.json(
-          { error: { code: 'CLERK_ERROR', message: 'Failed to set up your account — please try again' } },
-          { status: 500 }
-        )
-      }
 
       return NextResponse.json({ role: 'admin', org_id: orgId }, { status: 200 })
     }
