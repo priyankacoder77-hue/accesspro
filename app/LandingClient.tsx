@@ -209,7 +209,7 @@ function Features() {
   return (
     <SectionWrap id="features">
       <div className={styles.sectionHeader}>
-        <div className={styles.eyebrow}>// features</div>
+        <div className={styles.eyebrow}>{'// features'}</div>
         <h2 className={styles.sectionTitle}>Architecture you can trace, line by line.</h2>
         <p className={styles.sectionSub}>
           Every mechanic that matters in a multi-role SaaS — wired correctly, named clearly,
@@ -292,7 +292,7 @@ function HowItWorks() {
   return (
     <SectionWrap id="flow">
       <div className={styles.sectionHeader}>
-        <div className={styles.eyebrow}>// flow</div>
+        <div className={styles.eyebrow}>{'// flow'}</div>
         <h2 className={styles.sectionTitle}>From signup to subscription, in 60 seconds.</h2>
         <p className={styles.sectionSub}>
           Trace the full lifecycle — auth, invite, payment — in three deliberate steps.
@@ -335,7 +335,7 @@ function ProductShowcase() {
   return (
     <SectionWrap>
       <div className={styles.sectionHeader}>
-        <div className={styles.eyebrow}>// surfaces</div>
+        <div className={styles.eyebrow}>{'// surfaces'}</div>
         <h2 className={styles.sectionTitle}>What you actually ship.</h2>
         <p className={styles.sectionSub}>
           Three surfaces, three roles, one consistent architecture underneath.
@@ -441,7 +441,7 @@ function Pricing() {
   return (
     <SectionWrap id="pricing">
       <div className={styles.sectionHeader}>
-        <div className={styles.eyebrow}>// pricing</div>
+        <div className={styles.eyebrow}>{'// pricing'}</div>
         <h2 className={styles.sectionTitle}>Honest pricing. Real paywall.</h2>
         <p className={styles.sectionSub}>
           The pricing here isn&apos;t marketing — it&apos;s the artifact under test. A real Stripe
