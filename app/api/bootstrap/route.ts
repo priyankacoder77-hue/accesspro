@@ -14,8 +14,8 @@ export async function POST(req: Request): Promise<NextResponse> {
       )
     }
 
-    const existingRole = (sessionClaims?.publicMetadata as { role?: string })?.role
-    const existingOrgId = (sessionClaims?.publicMetadata as { org_id?: string })?.org_id
+    const existingRole = (sessionClaims?.metadata as { role?: string })?.role
+    const existingOrgId = (sessionClaims?.metadata as { org_id?: string })?.org_id
 
     if (existingRole && existingOrgId) {
       return NextResponse.json(

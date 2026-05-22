@@ -28,7 +28,7 @@ export default clerkMiddleware(async (auth, request) => {
       return NextResponse.redirect(signInUrl)
     }
 
-    const role = (sessionClaims?.publicMetadata as { role?: string })?.role
+    const role = (sessionClaims?.metadata as { role?: string })?.role
 
     if (!role && pathname.startsWith('/dashboard')) {
       return NextResponse.redirect(new URL('/onboard', request.url))
