@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { LayoutDashboard } from 'lucide-react'
+import { LayoutDashboard, Users } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Sidebar } from '@/components/layout/Sidebar'
 import type { NavItem } from '@/components/layout/Sidebar'
@@ -12,6 +12,13 @@ import type { NavItem } from '@/components/layout/Sidebar'
 const navItemsByRole: Record<string, NavItem[]> = {
   default: [
     { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+  ],
+  admin: [
+    { label: 'Dashboard', href: '/dashboard/admin', icon: LayoutDashboard },
+    { label: 'Managers', href: '/dashboard/admin/managers', icon: Users },
+  ],
+  manager: [
+    { label: 'Dashboard', href: '/dashboard/manager', icon: LayoutDashboard },
   ],
 }
 
@@ -50,9 +57,9 @@ export function DashboardShell({ children, role }: DashboardShellProps) {
   }
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', height: '100vh', overflow: 'hidden' }}>
+    <div className="flex flex-col h-screen overflow-hidden">
       <Header onMobileMenuOpen={() => setMobileOpen(prev => !prev)} />
-      <div style={{ display: 'flex', flex: 1, minHeight: 0 }}>
+      <div className="flex flex-1 min-h-0">
         <Sidebar
           navItems={navItems}
           collapsed={isDesktop && collapsed}
@@ -60,7 +67,7 @@ export function DashboardShell({ children, role }: DashboardShellProps) {
           onToggleCollapse={handleToggleCollapse}
           onMobileClose={() => setMobileOpen(false)}
         />
-        <main style={{ flex: 1, overflowY: 'auto', minWidth: 0, padding: '40px 24px' }}>
+        <main className="flex-1 overflow-y-auto min-w-0 px-6 py-10">
           {children}
         </main>
       </div>
