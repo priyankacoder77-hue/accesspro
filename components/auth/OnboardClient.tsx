@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useSession } from '@clerk/nextjs'
 
 interface OnboardClientProps {
@@ -9,10 +9,16 @@ interface OnboardClientProps {
 
 export function OnboardClient({ inviteToken }: OnboardClientProps) {
   const { session } = useSession()
+  const sessionRef = useRef(session)
+  sessionRef.current = session
+  const hasRun = useRef(false)
   const [error, setError] = useState<string | null>(null)
   const [isBootstrapping, setIsBootstrapping] = useState(true)
 
   useEffect(() => {
+    if (hasRun.current) return
+    hasRun.current = true
+
     async function run() {
       try {
         const body = inviteToken ? JSON.stringify({ inviteToken }) : JSON.stringify({})
@@ -34,7 +40,7 @@ export function OnboardClient({ inviteToken }: OnboardClientProps) {
 
         const data = (await res.json()) as { role: 'admin' | 'manager'; org_id: string }
 
-        await session?.reload()
+        await sessionRef.current?.reload()
 
         if (data.role === 'admin') {
           window.location.href = '/dashboard/admin'
@@ -48,7 +54,7 @@ export function OnboardClient({ inviteToken }: OnboardClientProps) {
     }
 
     run().catch(err => console.error('[OnboardClient]', err))
-  }, [inviteToken, session])
+  }, [inviteToken])
 
   if (error) {
     return (

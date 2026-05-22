@@ -154,7 +154,18 @@ export async function POST(req: Request): Promise<NextResponse> {
 
       return NextResponse.json({ role: 'manager', org_id: orgId }, { status: 200 })
     } else {
-      // Admin bootstrap path
+      // Admin bootstrap path — DB-level idempotency (JWT is stale before bootstrap sets metadata)
+      const { data: existingUser } = await db
+        .from('users')
+        .select('org_id, role')
+        .eq('id', userId)
+        .single()
+
+      if (existingUser) {
+        const u = existingUser as { org_id: string; role: string }
+        return NextResponse.json({ role: u.role, org_id: u.org_id }, { status: 200 })
+      }
+
       const orgId = crypto.randomUUID()
       const orgName = email.split('@')[0] ?? 'My Org'
 
