@@ -29,6 +29,8 @@
   --success: #22c55e;
   --warning: #f59e0b;
   --error: #ef4444;
+  --error-bg: rgba(239, 68, 68, 0.1);
+  --error-border: rgba(239, 68, 68, 0.2);
 
   /* Radius scale */
   --radius-sm: 8px;
@@ -49,6 +51,8 @@
   --text-primary: #0f0f1a;
   --text-secondary: #555570;
   --text-tertiary: #9999bb;
+  --error-bg: rgba(239, 68, 68, 0.08);
+  --error-border: rgba(239, 68, 68, 0.18);
 }
 
 /* ─── Base ───────────────────────────────────────────────────────────────────── */
